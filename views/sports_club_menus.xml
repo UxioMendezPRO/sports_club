@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+  <!-- menu items -->
+
+  <menuitem
+    id="sports_main_menu"
+    name="Sports CLub"
+  />
+
+
+  <menuitem
+    id="res_partner_menu"
+    name="Athletes"
+    parent="sports_main_menu"
+    action="action_res_partner_view"
+  />
+
+
+
+
+
+
+  <!-- Actions -->
+
+
+  <record model="ir.actions.act_window" id="action_res_partner_view">
+    <field name="name">Athletes</field>
+    <field name="res_model">res.partner</field>
+    <field name="view_mode">tree,form,search,kanban</field>
+  </record>
+
+
+
+
+</odoo>
