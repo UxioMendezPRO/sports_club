@@ -6,17 +6,16 @@
 
   <menuitem
     id="sports_main_menu"
-    name="Sports CLub"
+    name="Sports Club"
   />
 
 
   <menuitem
-    id="res_partner_menu"
+    id="athletes_sports_menu"
     name="Athletes"
     parent="sports_main_menu"
-    action="action_res_partner_view"
+    action="action_athletes_sports_view"
   />
-
 
 
 
@@ -25,9 +24,9 @@
   <!-- Actions -->
 
 
-  <record model="ir.actions.act_window" id="action_res_partner_view">
+  <record model="ir.actions.act_window" id="action_athletes_sports_view">
     <field name="name">Athletes</field>
-    <field name="res_model">res.partner</field>
+    <field name="res_model">athletes.sports</field>
     <field name="view_mode">tree,form,search,kanban</field>
   </record>
 
