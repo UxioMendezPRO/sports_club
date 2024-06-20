@@ -1,4 +1,4 @@
-# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
+o# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import fields, models, api
 
@@ -20,9 +20,9 @@ class AthleteSpots(models.Model):
     postal_code = fields.Integer(string="Postal code", required=True)
     nationality = fields.Char(string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
-    category = fields.Selection(
-        compute="_compute_category", string="Category", required=True
-    )
+    # category = fields.Selection(
+    #     compute="_compute_category", string="Category", required=True
+    # )
 
-    @api.depends("category")
-    def _compute_category(self):
+    # @api.depends("category")
+    # def _compute_category(self):

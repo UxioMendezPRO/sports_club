@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+  <!-- Actions -->
+
+
+  <record model="ir.actions.act_window" id="action_athletes_sports_view">
+    <field name="name">Athletes</field>
+    <field name="res_model">athlete.sports</field>
+    <field name="view_mode">tree,form,search,kanban</field>
+  </record>
+
+
 
   <!-- menu items -->
 
@@ -10,25 +20,17 @@
   />
 
 
-  <menuitem
-    id="athletes_sports_menu"
-    name="Athletes"
-    parent="sports_main_menu"
-    action="action_athletes_sports_view"
-  />
+<menuitem
+  id="athletes_sports_menu"
+  name="Athletes"
+  parent="sports_main_menu"
+  action="action_athletes_sports_view"
+/>
 
 
 
 
 
-  <!-- Actions -->
-
-
-  <record model="ir.actions.act_window" id="action_athletes_sports_view">
-    <field name="name">Athletes</field>
-    <field name="res_model">athletes.sports</field>
-    <field name="view_mode">tree,form,search,kanban</field>
-  </record>
 
 
 

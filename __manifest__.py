@@ -12,6 +12,7 @@
     "depends": ["base"],
     "application": True,
     "data": [
+        "security/ir.model.access.csv",
         "views/sports_club_menus.xml",
     ],
 }
