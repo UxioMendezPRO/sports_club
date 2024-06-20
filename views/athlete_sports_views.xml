@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+
+    <record id="athlete_sports_view_tree" model="ir.ui.view">
+        <field name="name">athlete.sports.view.tree</field>
+        <field name="model">athlete.sports</field>
+        <field name="arch" type="xml">
+            <tree string="Athletes">
+              <field name="name"/>
+              <field name="surname"/>
+              <field name="sex"/>
+              <field name="category"/>
+              </tree> 
+        </field>
+    </record>
+
+  </odoo>

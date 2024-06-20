@@ -14,5 +14,6 @@
     "data": [
         "security/ir.model.access.csv",
         "views/sports_club_menus.xml",
+        "views/athlete_sports_views.xml",
     ],
 }

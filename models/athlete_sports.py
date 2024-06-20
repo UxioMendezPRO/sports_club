@@ -1,6 +1,7 @@
-o# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
+# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import fields, models, api
+from datetime import datetime
 
 
 class AthleteSpots(models.Model):
@@ -20,9 +21,35 @@ class AthleteSpots(models.Model):
     postal_code = fields.Integer(string="Postal code", required=True)
     nationality = fields.Char(string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
-    # category = fields.Selection(
-    #     compute="_compute_category", string="Category", required=True
-    # )
+    category = fields.Selection(
+        [
+            ("senior", "Senior"),
+            ("junior", "Junior"),
+            ("cadet", "Cadet"),
+            ("youth", "Youth"),
+            ("beginner", "Beginner"),
+        ],
+        compute="_compute_category",
+        string="Category",
+        required=True,
+    )
+    current_date = fields.Date(compute="_compute_current_date")
 
-    # @api.depends("category")
-    # def _compute_category(self):
+    @api.depends()
+    def _compute_current_date(self):
+        for record in self:
+            record.current_date = datetime.now().date()
+
+    @api.depends("category")
+    def _compute_category(self):
+        for record in self:
+            if datetime.now().year - record.birthdate.year > 18:
+                record.category = "senior"
+            elif datetime.now().year - record.birthdate.year < 18:
+                record.category = "junior"
+            elif datetime.now().year - record.birthdate.year < 16:
+                record.category = "cadet"
+            elif datetime.now().year - record.birthdate.year < 14:
+                record.category = "youth"
+            elif datetime.now().year - record.birthdate.year < 12:
+                record.category = "beginner"
