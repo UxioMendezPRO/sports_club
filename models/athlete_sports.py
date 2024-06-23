@@ -21,6 +21,9 @@ class AthleteSpots(models.Model):
     postal_code = fields.Integer(string="Postal code", required=True)
     nationality = fields.Char(string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
+    license_number = fields.Char(string="Place of birth")
+    is_partner = fields.Boolean(string="Partner")
+    partner_id = fields.Many2one("res.partner", string="Partner name")
     category = fields.Selection(
         [
             ("senior", "Senior"),
@@ -34,6 +37,7 @@ class AthleteSpots(models.Model):
         required=True,
     )
     current_date = fields.Date(compute="_compute_current_date")
+    coach_id = fields.Many2one("coach.sports", string="Coach")
 
     @api.depends()
     def _compute_current_date(self):
@@ -53,3 +57,5 @@ class AthleteSpots(models.Model):
                 record.category = "youth"
             elif datetime.now().year - record.birthdate.year < 12:
                 record.category = "beginner"
+
+    
