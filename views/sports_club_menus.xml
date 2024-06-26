@@ -17,6 +17,12 @@
   </record>
 
 
+  <record model="ir.actions.act_window" id="action_coach_sports_view">
+    <field name="name">Partners</field>
+    <field name="res_model">coach.sports</field>
+    <field name="view_mode">tree,form,search,kanban</field>
+  </record>
+
   <!-- menu items -->
 
   <menuitem
@@ -40,9 +46,12 @@
 />
 
 
-
-
-
+<menuitem
+  id="coach_sports_menu"
+  name="Coach"
+  parent="sports_main_menu"
+  action="action_coach_sports_view"
+/>
 
 
 
