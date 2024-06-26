@@ -9,8 +9,7 @@ class AthleteSpots(models.Model):
     _description = "Athletes"
 
     name = fields.Char(string="Name", required=True)
-    surname = fields.Char(string="Surname", required=True)
-    id = fields.Char(string="ID number", required=True)
+    id_card = fields.Char(string="ID number", required=True)
     phone = fields.Integer(string="Phone", required=True)
     email = fields.Char(string="Email", required=True)
     sex = fields.Selection(
@@ -21,7 +20,7 @@ class AthleteSpots(models.Model):
     postal_code = fields.Integer(string="Postal code", required=True)
     nationality = fields.Char(string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
-    license_number = fields.Char(string="Place of birth")
+    license_number = fields.Char(string="License number")
     is_partner = fields.Boolean(string="Partner")
     partner_id = fields.Many2one("res.partner", string="Partner name")
     category = fields.Selection(
@@ -34,7 +33,6 @@ class AthleteSpots(models.Model):
         ],
         compute="_compute_category",
         string="Category",
-        required=True,
     )
     current_date = fields.Date(compute="_compute_current_date")
     coach_id = fields.Many2one("coach.sports", string="Coach")
@@ -58,4 +56,15 @@ class AthleteSpots(models.Model):
             elif datetime.now().year - record.birthdate.year < 12:
                 record.category = "beginner"
 
-    
+    @api.onchange("is_partner")
+    def _onchange_is_partner(self):
+        if self.is_partner:
+            partner = self.env["res.partner"].create(
+                {
+                    "name": self.name,
+                    "id": self.id,
+                    "phone": self.phone,
+                    "email": self.email,
+                    "address": self.address,
+                }
+            )

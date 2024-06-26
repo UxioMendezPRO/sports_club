@@ -8,7 +8,6 @@
         <field name="arch" type="xml">
             <tree string="Athletes">
               <field name="name"/>
-              <field name="surname"/>
               <field name="sex"/>
               <field name="category"/>
               </tree> 
