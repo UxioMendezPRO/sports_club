@@ -6,7 +6,36 @@
     <field name="model">res.partner</field>
     <field name="inherit_id" ref="base.view_partner_form" />
     <field name="arch" type="xml">
-      <xpath expr="//group" position="inside">
+
+            <!-- Replaces -->
+            <field name="vat" position="replace"></field>
+            <field name="function" position="replace"></field>
+            <field name="title" position="replace"></field>
+            <field name="company_type" position="replace"></field>
+            <field name="website" position="replace"></field>
+            <field name="company_name" position="replace"></field>
+            <field name="mobile" position="replace"></field>
+            <field name="lang" position="replace"></field>
+            <xpath expr="//button[@name='create_company']" position="replace"></xpath>
+            <xpath expr="//page[@name='sales_purchases']" position="replace"></xpath>
+
+            <!-- Se incluyen para borrar la página sin romper la vista -->
+      <xpath expr="//sheet" position="before">
+        <header>
+          <h3>
+            <field name="user_id" />
+            <span> - </span>
+            <field name="company_name" />
+            <span> - </span>
+            <field name="team_id" />
+            <span> - </span>
+            <field name="lang"></field>
+          </h3>
+        </header>
+      </xpath>
+
+      <!-- Campos nuevps -->
+      <xpath expr="//group/group" position="inside">
         <field name="id"></field>
         <field name="associate_number"></field>
         <field name="registration_date"></field>

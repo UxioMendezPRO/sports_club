@@ -1,6 +1,7 @@
 # Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import fields, models, api
+from odoo.exceptions import UserError
 from datetime import datetime
 
 
@@ -16,12 +17,13 @@ class AthleteSpots(models.Model):
         [("male", "Male"), ("female", "Female")], string="Sex", required=True
     )
     birthdate = fields.Date(string="Birthdate", required=True)
-    address = fields.Char(string="Address", required=True)
-    postal_code = fields.Integer(string="Postal code", required=True)
-    nationality = fields.Char(string="Nationality", required=True)
+    street = fields.Char(string="Address", required=True)
+    city = fields.Char(string="City")
+    state_id = fields.Many2one("res.country.state", string="State")
+    zip = fields.Integer(string="ZIP", required=True)
+    country_id = fields.Many2one("res.country", string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
     license_number = fields.Char(string="License number")
-    is_partner = fields.Boolean(string="Partner")
     partner_id = fields.Many2one("res.partner", string="Partner name")
     category = fields.Selection(
         [
@@ -56,15 +58,20 @@ class AthleteSpots(models.Model):
             elif datetime.now().year - record.birthdate.year < 12:
                 record.category = "beginner"
 
-    @api.onchange("is_partner")
-    def _onchange_is_partner(self):
-        if self.is_partner:
-            partner = self.env["res.partner"].create(
-                {
-                    "name": self.name,
-                    "id": self.id,
-                    "phone": self.phone,
-                    "email": self.email,
-                    "address": self.address,
-                }
-            )
+    def action_make_partner(self):
+        athlete_ids = self.env["res.partner"].search([])
+        if self in athlete_ids:
+            raise UserError("This athlete is already a partner")  # revisar
+        partner_vals = {
+            "name": self.name,
+            "athlete_ids": [(4, self.id)],
+            "phone": self.phone,
+            "email": self.email,
+            "street": self.street,
+            "city": self.city,
+            "zip": self.zip,
+            "state_id": self.state_id.id if self.state_id else False,
+            "country_id": (self.country_id.id if self.country_id else False),
+        }
+        partner = self.env["res.partner"].create(partner_vals)
+        return partner

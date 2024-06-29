@@ -1,7 +1,7 @@
 # Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
-    "name": "sports_club",
+    "name": "Sports Club",
     "summary": "Custom module",
     "version": "16.0.0.0.0",
     "category": "Sports",
@@ -15,5 +15,6 @@
         "security/ir.model.access.csv",
         "views/sports_club_menus.xml",
         "views/athlete_sports_views.xml",
+        "views/res_partner_views.xml",
     ],
 }
