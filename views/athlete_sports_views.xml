@@ -15,6 +15,51 @@
     </record>
 
 
+    <record id="athlete_sports_view_form" model="ir.ui.view">
+      <field name="name">athlete.sports.view.form</field>
+      <field name="model">athlete.sports</field>
+      <field name="arch" type="xml">
+          <form string="Athletes">
+              <sheet>  
+
+                <h1>
+                  <field name="name"/>
+                </h1>     
+
+                <group>                
+                  <group col="1">                
+                  <field name="sex"/>
+                  <field name="category"/>
+                  <field name="license_number"/>
+                </group>
+                <group col="2">                
+                  <field name="id_card"/>
+                  <field name="birthdate"/>
+                  <field name="coach_id"/>
+                </group>
+              </group>
+
+            <notebook>
+              <page string="Contact">
+                <group>
+                    <field name="street"/>
+                    <field name="city"/>
+                    <field name="state_id"/>
+                    <field name="zip"/>
+                    <field name="country_id"/>
+                    <field name="state_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                  </group>
+              </page>
+              <page string="Partner">
+                <field name="partner_id"/>
+          </page>
+            </notebook>
+          </sheet>        
+            </form> 
+      </field>
+  </record>
 
 
   </odoo>
