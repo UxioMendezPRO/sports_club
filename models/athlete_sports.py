@@ -12,7 +12,7 @@ class AthleteSpots(models.Model):
     name = fields.Char(string="Name", required=True)
     id_card = fields.Char(string="ID number", required=True)
     phone = fields.Integer(string="Phone", required=True)
-    email = fields.Char(string="Email", required=True)
+    email = fields.Char(string="eMail", required=True)
     sex = fields.Selection(
         [("male", "Male"), ("female", "Female")], string="Sex", required=True
     )
@@ -59,8 +59,8 @@ class AthleteSpots(models.Model):
                 record.category = "beginner"
 
     def action_make_partner(self):
-        athlete_ids = self.env["res.partner"].search([])
-        if self in athlete_ids:
+        existing_partner = self.env["res.partner"].search([('athlete_ids', 'in', [self.id])], limit=1)
+        if existing_partner:
             raise UserError("This athlete is already a partner")  # revisar
         partner_vals = {
             "name": self.name,

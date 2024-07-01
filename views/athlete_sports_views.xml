@@ -57,9 +57,24 @@
           </page>
             </notebook>
           </sheet>        
+            <header>
+              <button name="action_make_partner" string="Make partner" type="object"/>
+            </header>
             </form> 
       </field>
   </record>
+
+  <record id="athlete_sports_view_search" model="ir.ui.view">
+    <field name="name">athlete.sports.view.search</field>
+    <field name="model">athlete.sports</field>
+    <field name="arch" type="xml">
+        <tree string="Athletes">
+          <field name="name"/>
+          <field name="sex"/>
+          <field name="category"/>
+          </tree> 
+    </field>
+</record>
 
 
   </odoo>
