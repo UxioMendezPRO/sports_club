@@ -39,6 +39,7 @@ class AthleteSpots(models.Model):
     current_date = fields.Date(compute="_compute_current_date")
     coach_id = fields.Many2one("coach.sports", string="Coach")
     image = fields.Image(string="Image")
+    license_ids = fields.One2many("license.sports", "athlete_id", string="Licenses")
 
     @api.depends()
     def _compute_current_date(self):

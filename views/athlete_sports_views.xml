@@ -51,6 +51,9 @@
                     <field name="email"/>
                   </group>
               </page>
+              <page string="Seasons">
+                <field name="license_ids"/>
+              </page>
               <page string="Partner">
                 <field name="partner_id"/>
           </page>
