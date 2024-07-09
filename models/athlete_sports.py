@@ -17,7 +17,7 @@ class AthleteSpots(models.Model):
     sex = fields.Selection(
         [("male", "Male"), ("female", "Female")], string="Sex", required=True
     )
-    birthdate = fields.Date(string="Birthdate", required=True)
+    birthdate = fields.Date(string="Birthdate", required=True, default=datetime.now())
     street = fields.Char(string="Address", required=True)
     city = fields.Char(string="City")
     state_id = fields.Many2one("res.country.state", string="State")
