@@ -18,7 +18,7 @@
 
 
   <record model="ir.actions.act_window" id="action_coach_sports_view">
-    <field name="name">Partners</field>
+    <field name="name">Coach</field>
     <field name="res_model">coach.sports</field>
     <field name="view_mode">tree,form,search,kanban</field>
   </record>

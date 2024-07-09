@@ -1,8 +1,9 @@
 # Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-from odoo import fields, models, api
-from odoo.exceptions import UserError
 from datetime import datetime
+
+from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class AthleteSpots(models.Model):
@@ -46,24 +47,27 @@ class AthleteSpots(models.Model):
         for record in self:
             record.current_date = datetime.now().date()
 
-    @api.depends("category")
+    @api.depends("birthdate")
     def _compute_category(self):
         for record in self:
-            if datetime.now().year - record.birthdate.year > 18:
+            age = datetime.now().year - record.birthdate.year
+            if age >= 18:
                 record.category = "senior"
-            elif datetime.now().year - record.birthdate.year < 18:
+            elif age >= 16:
                 record.category = "junior"
-            elif datetime.now().year - record.birthdate.year < 16:
+            elif age >= 14:
                 record.category = "cadet"
-            elif datetime.now().year - record.birthdate.year < 14:
+            elif age >= 12:
                 record.category = "youth"
-            elif datetime.now().year - record.birthdate.year < 12:
+            else:
                 record.category = "beginner"
 
     def action_make_partner(self):
-        existing_partner = self.env["res.partner"].search([('athlete_ids', 'in', [self.id])], limit=1)
+        existing_partner = self.env["res.partner"].search(
+            [("athlete_ids", "in", [self.id])], limit=1
+        )
         if existing_partner:
-            raise UserError("This athlete is already a partner")  # revisar
+            raise UserError("This athlete is already a partner")  
         partner_vals = {
             "name": self.name,
             "athlete_ids": [(4, self.id)],

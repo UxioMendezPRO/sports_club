@@ -1,0 +1,27 @@
+<odoo>
+
+  <record id="license_sports_view_tree" model="ir.ui.view">
+    <field name="name">license.sports.view.tree</field>
+    <field name="model">license.sports</field>
+    <field name="arch" type="xml">
+        <tree name="Seasons">
+          <field name="season"/>
+          </tree> 
+    </field>
+</record>
+
+<record id="license_sports_view_form" model="ir.ui.view">
+  <field name="name">license.sports.view.form</field>
+  <field name="model">license.sports</field>
+  <field name="arch" type="xml">
+      <form name="Seasons">
+        <field name="season"/>
+        <button name="action_sell_license" type="object" string="Sell License"></button>           
+        </form> 
+  </field>
+</record>
+
+
+
+
+</odoo>

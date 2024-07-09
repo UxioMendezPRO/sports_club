@@ -34,7 +34,7 @@
         </header>
       </xpath>
 
-      <!-- Campos nuevps -->
+      <!-- Campos nuevos -->
       <xpath expr="//group/group" position="inside">
         <field name="id"></field>
         <field name="associate_number"></field>
