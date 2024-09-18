@@ -6,7 +6,7 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
-class AthleteSpots(models.Model):
+class AthleteSports(models.Model):
     _name = "athlete.sports"
     _description = "Athletes"
 
@@ -38,9 +38,10 @@ class AthleteSpots(models.Model):
         string="Category",
     )
     current_date = fields.Date(compute="_compute_current_date")
-    coach_id = fields.Many2one("coach.sports", string="Coach")
     image = fields.Image(string="Image")
     license_ids = fields.One2many("license.sports", "athlete_id", string="Licenses")
+    team_ids = fields.Many2many("team.sports")
+    coach_id = fields.Many2one("coach.sports")
 
     @api.depends()
     def _compute_current_date(self):

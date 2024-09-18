@@ -70,11 +70,11 @@
     <field name="name">athlete.sports.view.search</field>
     <field name="model">athlete.sports</field>
     <field name="arch" type="xml">
-        <tree string="Athletes">
+        <search string="Athletes">
           <field name="name"/>
           <field name="sex"/>
           <field name="category"/>
-          </tree> 
+          </search> 
     </field>
 </record>
 

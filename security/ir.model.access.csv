@@ -3,3 +3,4 @@ sports_club.access_athlete_sports,access_athlete_sports,sports_club.model_athlet
 sports_club.access_coach_sports,access_coach_sports,sports_club.model_coach_sports,base.group_user,1,1,1,1
 sports_club.access_license_sports,access_license_sports,sports_club.model_license_sports,base.group_user,1,1,1,1
 sports_club.access_season_sports,access_season_sports,sports_club.model_season_sports,base.group_user,1,1,1,1
+sports_club.access_team_sports,access_team_sports,sports_club.model_team_sports,base.group_user,1,1,1,1

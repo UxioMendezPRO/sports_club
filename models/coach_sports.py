@@ -6,5 +6,5 @@ class CoachSports(models.Model):
   _name = "coach.sports"
   _description = "coach"
 
-  athletes_ids = fields.One2many("athlete.sports", "coach_id")
-  
+  name = fields.Char(string="Name", required=True)
+  team_ids = fields.One2many("team.sports", "coach_id")

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="coach_sports_view_tree" model="ir.ui.view">
+        <field name="name">coach.sports.view.tree</field>
+        <field name="model">coach.sports</field>
+        <field name="arch" type="xml">
+            <tree string="Coach">
+              <field name="name"/>
+              </tree> 
+        </field>
+    </record>
+
+
+    <record id="coach_sports_view_form" model="ir.ui.view">
+      <field name="name">coach.sports.view.form</field>
+      <field name="model">coach.sports</field>
+      <field name="arch" type="xml">
+          <form string="Coach">
+            <field name="team_ids"/>                        
+            </form> 
+      </field>
+  </record>
+
+  <record id="coach_sports_view_search" model="ir.ui.view">
+    <field name="name">coach.sports.view.search</field>
+    <field name="model">coach.sports</field>
+    <field name="arch" type="xml">
+        <search string="Athletes">
+          <field name="name"/>
+          </search> 
+    </field>
+</record>
+
+
+  </odoo>

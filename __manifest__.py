@@ -17,5 +17,6 @@
         "views/athlete_sports_views.xml",
         "views/res_partner_views.xml",
         "views/license_sports_views.xml",
+        "views/coach_sports_views.xml",
     ],
 }
