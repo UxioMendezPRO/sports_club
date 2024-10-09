@@ -23,6 +23,8 @@
     <field name="view_mode">tree,form,search,kanban</field>
   </record>
 
+
+
   <!-- menu items -->
 
   <menuitem
@@ -52,6 +54,7 @@
   parent="sports_main_menu"
   action="action_coach_sports_view"
 />
+
 
 
 

@@ -1,4 +1,4 @@
-# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
+# Copyright 2024 Uxio Mendez Pazos <uxio.mendev@gmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from datetime import datetime
 
@@ -24,7 +24,6 @@ class AthleteSports(models.Model):
     zip = fields.Integer(string="ZIP", required=True)
     country_id = fields.Many2one("res.country", string="Nationality", required=True)
     place_of_birth = fields.Char(string="Place of birth", required=True)
-    license_number = fields.Char(string="License number")
     partner_id = fields.Many2one("res.partner", string="Partner name")
     category = fields.Selection(
         [
@@ -41,7 +40,10 @@ class AthleteSports(models.Model):
     image = fields.Image(string="Image")
     license_ids = fields.One2many("license.sports", "athlete_id", string="Licenses")
     team_ids = fields.Many2many("team.sports")
-    coach_id = fields.Many2one("coach.sports")
+    coach_id = fields.Char(compute="_compute_coach", string="Coach")
+    license_number = fields.Char(
+        compute="_compute_license_number", string="License number"
+    )
 
     @api.depends()
     def _compute_current_date(self):
@@ -63,12 +65,18 @@ class AthleteSports(models.Model):
             else:
                 record.category = "beginner"
 
+    @api.depends("team_ids")
+    def _compute_coach(self):
+        for record in self:
+            record.coach_id = record.team_ids.coach_id.name
+        return record.coach_id
+
     def action_make_partner(self):
         existing_partner = self.env["res.partner"].search(
             [("athlete_ids", "in", [self.id])], limit=1
         )
         if existing_partner:
-            raise UserError("This athlete is already a partner")  
+            raise UserError("This athlete is already a partner")
         partner_vals = {
             "name": self.name,
             "athlete_ids": [(4, self.id)],
@@ -82,3 +90,9 @@ class AthleteSports(models.Model):
         }
         partner = self.env["res.partner"].create(partner_vals)
         return partner
+
+    @api.depends("license_ids")
+    def _compute_license_number(self):
+        for record in self:
+            record.license_number = record.license_ids.license_number
+        return record.license_number

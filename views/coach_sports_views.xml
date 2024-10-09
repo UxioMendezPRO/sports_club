@@ -18,6 +18,7 @@
       <field name="model">coach.sports</field>
       <field name="arch" type="xml">
           <form string="Coach">
+            <field name="name"/>
             <field name="team_ids"/>                        
             </form> 
       </field>
@@ -26,7 +27,7 @@
   <record id="coach_sports_view_search" model="ir.ui.view">
     <field name="name">coach.sports.view.search</field>
     <field name="model">coach.sports</field>
-    <field name="arch" type="xml">
+    <field name="arch" type="xml">    
         <search string="Athletes">
           <field name="name"/>
           </search> 

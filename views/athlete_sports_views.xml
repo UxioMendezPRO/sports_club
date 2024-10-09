@@ -51,7 +51,7 @@
                     <field name="place_of_birth"/>
                   </group>
               </page>
-              <page string="Seasons">
+              <page string="Licenses">
                 <field name="license_ids"/>
               </page>
               <page string="Partner">

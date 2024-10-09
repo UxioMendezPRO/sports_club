@@ -4,8 +4,8 @@
     <field name="name">license.sports.view.tree</field>
     <field name="model">license.sports</field>
     <field name="arch" type="xml">
-        <tree name="Seasons">
-          <field name="season"/>
+        <tree name="Licenses">
+          <field name="season_id"/>
           </tree> 
     </field>
 </record>
@@ -14,8 +14,12 @@
   <field name="name">license.sports.view.form</field>
   <field name="model">license.sports</field>
   <field name="arch" type="xml">
-      <form name="Seasons">
-        <field name="season"/>
+      <form name="Licenses">
+        <field name="season_id"/>
+        <field name="athlete_id"/>
+        <field name="partner_id"/>
+        <field name="athlete_category"/>
+        <field name="price"/>
         <button name="action_sell_license" type="object" string="Sell License"></button>           
         </form> 
   </field>

@@ -1,4 +1,4 @@
-# Copyright 2024 Uxio Mendez Pazos <uxio.mendez@hotmail.com>
+# Copyright 2024 Uxio Mendez Pazos <uxio.mendev@gmail.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import models, fields, api
 from datetime import datetime
