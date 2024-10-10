@@ -35,15 +35,14 @@ class AthleteSports(models.Model):
         ],
         compute="_compute_category",
         string="Category",
+        store=True
     )
     current_date = fields.Date(compute="_compute_current_date")
     image = fields.Image(string="Image")
     license_ids = fields.One2many("license.sports", "athlete_id", string="Licenses")
     team_ids = fields.Many2many("team.sports")
     coach_id = fields.Char(compute="_compute_coach", string="Coach")
-    license_number = fields.Char(
-        compute="_compute_license_number", string="License number"
-    )
+    license_number = fields.Char(string="License number")
 
     @api.depends()
     def _compute_current_date(self):
@@ -91,8 +90,3 @@ class AthleteSports(models.Model):
         partner = self.env["res.partner"].create(partner_vals)
         return partner
 
-    @api.depends("license_ids")
-    def _compute_license_number(self):
-        for record in self:
-            record.license_number = record.license_ids.license_number
-        return record.license_number

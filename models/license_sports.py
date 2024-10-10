@@ -8,7 +8,7 @@ class LicenseSports(models.Model):
     _name = "license.sports"
     _description = "License"
 
-    license_number = fields.Char(string="License number")
+    license_number = fields.Char(string="License number", required=True)
     athlete_id = fields.Many2one("athlete.sports", required=True)
     athlete_category = fields.Selection(
         [
@@ -20,6 +20,8 @@ class LicenseSports(models.Model):
         ],
         compute="_compute_athlete_category",
         string="Category",
+        required=True,
+        store=True,
     )
     partner_id = fields.Many2one(
         "res.partner",
@@ -30,8 +32,8 @@ class LicenseSports(models.Model):
     category_id = fields.Many2one("product.category")
     product_id = fields.Many2one("product.product")
     sale_order_id = fields.Many2one("sale.order")
-    price = fields.Float(string="Price", default=44.0)
-    season_id = fields.Many2one("season.sports", string="Season")
+    price = fields.Float(string="Price", default=44.0, required=True)
+    season_id = fields.Many2one("season.sports", string="Season", required=True)
 
     @api.depends("partner_id")
     def _compute_partner_id(self):
@@ -42,7 +44,6 @@ class LicenseSports(models.Model):
                 record.partner_id = False
 
     @api.depends("category_id")
-    # Crea la categoría del producto
     def assign_category_id(self):
         category = self.env["product.category"].search(
             [("name", "=", "Services")], limit=1
@@ -57,7 +58,6 @@ class LicenseSports(models.Model):
             record.category_id = category
 
     @api.depends("product_id")
-    # Crea la id del producto
     def create_product_id(self):
         if not self.category_id:
             self.assign_category_id()
@@ -76,7 +76,6 @@ class LicenseSports(models.Model):
             record.product_id = product
 
     def action_sell_license(self):
-        """""Method to sell a license to an athlete""" ""
         self.ensure_one()
         self.assign_category_id()
         self.create_product_id()
@@ -130,7 +129,7 @@ class LicenseSports(models.Model):
         else:
             raise ValueError("One or more required fields are missing or invalid.")
 
+    @api.depends("athlete_id")
     def _compute_athlete_category(self):
         for record in self:
             record.athlete_category = record.athlete_id.category
-        return record.athlete_category

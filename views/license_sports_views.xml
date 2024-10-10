@@ -17,7 +17,6 @@
       <form name="Licenses">
         <field name="season_id"/>
         <field name="athlete_id"/>
-        <field name="partner_id"/>
         <field name="athlete_category"/>
         <field name="price"/>
         <button name="action_sell_license" type="object" string="Sell License"></button>           
